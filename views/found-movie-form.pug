@@ -1,7 +1,7 @@
 div(class='flex flex-col md:flex-row md:gap-10 md:justify-center md:items-center')
   div(class='md:pb-3')
     img(class='rounded-md md:min-w-[100%] max-h-[50vh]', src=poster)
-  form(class='md:h-[calc(100vh-6rem)] md:pr-[14vw] md:overflow-y-auto md:py-12 md:mt-24 md:w-full', hx-swap='innerHTML', hx-target='#main-component', hx-put='https://localhost:3000/api/movies', hx-on::before-request='sanitizeAll()')
+  form(class='md:h-[calc(100vh-6rem)] md:pr-[14vw] md:overflow-y-auto md:py-12 md:mt-24 md:w-full', hx-swap='innerHTML', hx-target='#main-component', hx-put=`${nodeUri}/api/movies`, hx-on::before-request='sanitizeAll()')
     div(class='flex flex-col gap-7 child:flex child:flex-col child:gap-2')
       label(for='Title') Title
       input#Title(type='text', title='Title', name='Title', value=title, required)
@@ -36,7 +36,7 @@ div(class='flex flex-col md:flex-row md:gap-10 md:justify-center md:items-center
     div(class='sticky bottom-0 pb-8 gap-3 flex flex-row justify-end items-center')
       a.button(href='javascript:history.back()') Go back
       if id != null
-        a.button(hx-target='#main-component', hx-delete=`https://localhost:3000/api/movies/${Id || id}`) Delete
+        a.button(hx-target='#main-component', hx-delete=`${nodeUri}/api/movies/${Id || id}`) Delete
         button.button(type='submit') Save changes
       else
         button.button(type='submit') Add movie

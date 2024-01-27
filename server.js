@@ -47,16 +47,22 @@ app.get('/redoc', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', { currentRoute: req.path });
+  res.render('index', {
+    currentRoute: req.path,
+    nodeUri: process.env.NODE_URI,
+  });
 });
 
 app.get('/edit', (req, res) => {
   const fromHtmx = req.headers['hx-request'];
 
   if (fromHtmx) {
-    res.render('find-movie-form');
+    res.render('find-movie-form', { nodeUri: process.env.NODE_URI });
   } else {
-    res.render('index', { currentRoute: req.path });
+    res.render('index', {
+      currentRoute: req.path,
+      nodeUri: process.env.NODE_URI,
+    });
   }
 });
 
@@ -68,7 +74,7 @@ app.get('/api/movies/random', async (req, res) => {
     const movieJson = await response.json();
     if (!movieJson) throw new HttpError('Movie not found', 404);
 
-    res.render('movie', movieJson);
+    res.render('movie', { ...movieJson, nodeUri: process.env.NODE_URI });
   } catch (ex) {
     res.status(ex.status || 500).render('error', { error: ex });
   }
@@ -86,7 +92,10 @@ app.get('/api/movies/findMovie', async (req, res) => {
     const movieJson = await response.json();
     if (!movieJson) throw new HttpError('Movie not found', 404);
 
-    res.render('found-movie-form', movieJson);
+    res.render('found-movie-form', {
+      ...movieJson,
+      nodeUri: process.env.NODE_URI,
+    });
   } catch (ex) {
     res.status(ex.status || 500).render('error', { error: ex });
   }
@@ -105,14 +114,14 @@ app.put('/api/movies', async (req, res) => {
     });
     if (!response.ok) throw new Error(response.status);
 
-    res.render('movie', formData);
+    res.render('movie', { ...formData, nodeUri: process.env.NODE_URI });
   } catch (ex) {
     res.status(ex.status || 500).render('error', { error: ex });
   }
 });
 
 app.get('/api/movies/findMovieForm', (req, res) => {
-  res.render('find-movie-form');
+  res.render('find-movie-form', { nodeUri: process.env.NODE_URI });
 });
 
 app.get('/api/movies/:id', async (req, res) => {
@@ -125,7 +134,10 @@ app.get('/api/movies/:id', async (req, res) => {
     const movieJson = await response.json();
     if (!movieJson) throw new HttpError('Movie not found', 404);
 
-    res.render('found-movie-form', movieJson);
+    res.render('found-movie-form', {
+      ...movieJson,
+      nodeUri: process.env.NODE_URI,
+    });
   } catch (ex) {
     res.status(ex.status || 500).render('error', { error: ex });
   }

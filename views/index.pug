@@ -35,9 +35,9 @@ html(lang="en")
         header
         div
           if currentRoute === "/"
-            div(hx-get="https://localhost:3000/api/movies/random", hx-trigger="load", hx-target="#main-component", hx-swap="innerHTML")
+            div(hx-get=`${nodeUri}/api/movies/random`, hx-trigger="load", hx-target="#main-component", hx-swap="innerHTML")
             div
-              button(hx-get="https://localhost:3000/api/movies/random", hx-trigger="click", hx-target="#main-component", hx-swap="innerHTML") Next     
+              button(hx-get=`${nodeUri}/api/movies/random`, hx-trigger="click", hx-target="#main-component", hx-swap="innerHTML") Next     
           else if currentRoute === "/edit"
-            div(hx-get="https://localhost:3000/api/movies/findMovieForm", hx-trigger="load", hx-target="#main-component", hx-swap="innerHTML")
+            div(hx-get=`${nodeUri}/api/movies/findMovieForm`, hx-trigger="load", hx-target="#main-component", hx-swap="innerHTML")
     footer
