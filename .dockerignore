@@ -1,0 +1,22 @@
+# Ignore node_modules directory
+node_modules
+
+# Ignore logs
+*.log
+
+# Ignore the npm debug log
+npm-debug.log
+
+# Ignore .env file as it contains sensitive information
+.env
+
+# Ignore any .git directories
+.git
+
+# Ignore any build artifacts
+dist
+build
+
+# Ignore any test and coverage reports
+coverage
+*.test.js
