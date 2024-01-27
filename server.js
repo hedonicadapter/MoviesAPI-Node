@@ -159,4 +159,9 @@ app.delete('/api/movies/:id', async (req, res) => {
   }
 });
 
+app.use((err, req, res) => {
+  console.error(err.stack);
+  res.status(500).render('error', { error: err });
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
