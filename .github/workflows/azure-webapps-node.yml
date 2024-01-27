@@ -52,15 +52,22 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pnpm-
 
-    - name: pnpm install, build, and test
-      run: |
-        pnpm install
-
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
         name: node-app
-        path: .
+        path: |
+          .github
+          pages
+          public
+          views
+          .dockerignore
+          .gitignore
+          openapi-spec.yaml
+          package.json
+          pnpm-lock.yaml
+          server.js
+          util.js
 
   deploy:
     permissions:
